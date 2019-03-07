@@ -887,7 +887,7 @@ namespace Unity.Entities
                 else if (ct.SizeInChunk > 0)
                     scalarEntityPatchCount += ct.EntityOffsetCount;
             }
-
+            //在chunk上开辟Archetype所需内存以及其中一些成员指针所指向的数据内存
             Archetype* type = null;
             ChunkAllocate<Archetype>(&type);
             ChunkAllocate<ComponentTypeInArchetype>(&type->Types, count);
@@ -900,7 +900,7 @@ namespace Unity.Entities
             type->ManagedArrayOffset = null;
             if (NumManagedArrays > 0)
                 ChunkAllocate<int>(&type->ManagedArrayOffset, count);
-
+            //Archetype上数据的初始化
             type->TypesCount = count;
             UnsafeUtility.MemCpy(type->Types, types, sizeof(ComponentTypeInArchetype) * count);
             type->EntityCount = 0;
@@ -933,14 +933,14 @@ namespace Unity.Entities
                 if (types[i].IsChunkComponent)
                     type->HasChunkComponents = true;
             }
-
+            
             var chunkDataSize = Chunk.GetChunkBufferSize(type->TypesCount, type->NumSharedComponents);
 
             type->ScalarEntityPatchCount = scalarEntityPatchCount;
             type->BufferEntityPatchCount = bufferEntityPatchCount;
-
+            //计算Archetype的一个Instance占用的空间
             type->BytesPerInstance = 0;
-
+           
             for (var i = 0; i < count; ++i)
             {
                 var cType = TypeManager.GetTypeInfo(types[i].TypeIndex);
@@ -954,7 +954,7 @@ namespace Unity.Entities
 
                 type->BytesPerInstance += sizeOf;
             }
-
+            //计算chunk上可以存放多少个Instance
             type->ChunkCapacity = chunkDataSize / type->BytesPerInstance;
 
 #if ENABLE_UNITY_COLLECTIONS_CHECKS
