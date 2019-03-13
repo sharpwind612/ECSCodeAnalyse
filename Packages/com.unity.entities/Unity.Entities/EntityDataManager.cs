@@ -963,8 +963,10 @@ namespace Unity.Entities
             SharedComponentDataManager sharedComponentDataManager,
             EntityGroupManager groupManager)
         {
+            //获取Entity所属的Archetype，根据index找到对应Entity数据所在的Chunk
             var archetype = GetArchetype(entity);
             var chunk = m_Entities.ChunkData[entity.Index].Chunk;
+            //检查该chunk是否被上锁
             if (chunk->Locked)
             {
 #if ENABLE_UNITY_COLLECTIONS_CHECKS
@@ -976,8 +978,9 @@ namespace Unity.Entities
             }
 
             int indexInTypeArray=0;
+            //新建或者获取到添加一个Component后的新ArcheType
             var newType = archetypeManager.GetArchetypeWithAddedComponentType(archetype, type, groupManager, &indexInTypeArray);
-
+            //处理SharedComponentValue
             var sharedComponentValues = GetComponentChunk(entity)->SharedComponentValues;
             if (RequiresBuildingResidueSharedComponentIndices(archetype, newType))
             {
@@ -1396,6 +1399,7 @@ namespace Unity.Entities
             Chunk* chunk = null;
 
             int instanceBeginIndex = 0;
+            //循环将instanceCount个Entity的Component数据放入chunk中，每个chunk内部是连续的，多个chunk不连续
             while (instanceBeginIndex != instanceCount)
             {
                 chunk = archetypeManager.GetChunkWithEmptySlots(dstArchetype, sharedComponentValues);

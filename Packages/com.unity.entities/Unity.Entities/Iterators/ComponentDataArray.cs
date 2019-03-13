@@ -101,7 +101,7 @@ namespace Unity.Entities
 
                 if (index < m_Cache.CachedBeginIndex || index >= m_Cache.CachedEndIndex)
                     m_Iterator.MoveToEntityIndexAndUpdateCache(index, out m_Cache, false);
-
+                //相当于m_Cache.CachedPtr[index];
                 return UnsafeUtility.ReadArrayElement<T>(m_Cache.CachedPtr, index);
             }
 

@@ -470,6 +470,7 @@ namespace Unity.Entities
             cache.CachedBeginIndex = m_CurrentChunkEntityIndex + m_CurrentArchetypeEntityIndex;
             cache.CachedEndIndex = cache.CachedBeginIndex + (*m_CurrentChunk)->Count;
             cache.CachedSizeOf = archetype->SizeOfs[indexInArchetype];
+            //当前Chunk的数据起始地址 + 
             cache.CachedPtr = (*m_CurrentChunk)->Buffer + archetype->Offsets[indexInArchetype] -
                               cache.CachedBeginIndex * cache.CachedSizeOf;
 
