@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3341627160631973789}
   - component: {fileID: 1134111011062792979}
   - component: {fileID: 8564911307808605964}
+  - component: {fileID: 58346019281926172}
   m_Layer: 0
   m_Name: BasicSphereArchetype
   m_TagString: Untagged
@@ -114,3 +115,17 @@ MonoBehaviour:
     layer: 0
     castShadows: 0
     receiveShadows: 0
+--- !u!114 &58346019281926172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7756226592167583472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4df61fac11b1394393a25ef27a05443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedData:
+    index: 0
